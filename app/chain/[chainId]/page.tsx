@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { use, useMemo, useState } from 'react'
 import { useChains } from '@/hooks/useChains'
 import { useOApps } from '@/hooks/useOApps'
 import { useNotes } from '@/hooks/useNotes'
@@ -21,8 +21,8 @@ import { formatCurrency, formatNumber } from '@/lib/utils/format'
 
 type TabId = 'projects' | 'oapps' | 'tokens' | 'ecosystem' | 'notes'
 
-export default function ChainDetailPage({ params }: { params: { chainId: string } }) {
-  const { chainId } = params
+export default function ChainDetailPage({ params }: { params: Promise<{ chainId: string }> }) {
+  const { chainId } = use(params)
   const { chains, isLoading } = useChains()
   const { oapps } = useOApps()
   const { openPanel } = useNotes()

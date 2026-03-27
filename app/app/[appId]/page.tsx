@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { use, useMemo } from 'react'
 import { useOApps } from '@/hooks/useOApps'
 import { useChains } from '@/hooks/useChains'
 import { useNotes } from '@/hooks/useNotes'
@@ -13,8 +13,8 @@ import { formatNumber, formatCurrency } from '@/lib/utils/format'
 import { getChainColor } from '@/lib/utils/chain-colors'
 import { ExternalLink, StickyNote } from 'lucide-react'
 
-export default function AppDetailPage({ params }: { params: { appId: string } }) {
-  const { appId } = params
+export default function AppDetailPage({ params }: { params: Promise<{ appId: string }> }) {
+  const { appId } = use(params)
   const { oapps, isLoading } = useOApps()
   const { chains } = useChains()
   const { openPanel } = useNotes()
