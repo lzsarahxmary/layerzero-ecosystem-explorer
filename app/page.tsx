@@ -33,7 +33,7 @@ export default function HomePage() {
         )}
       </div>
 
-      <div className="border-t border-[#1a1a1a] bg-black/80 backdrop-blur-sm">
+      <div style={{ borderTop: '1px solid var(--line-primary)', background: 'rgba(10,10,10,0.85)', backdropFilter: 'blur(12px)' }}>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 p-3 max-w-7xl mx-auto">
           {isLoading ? (
             Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)

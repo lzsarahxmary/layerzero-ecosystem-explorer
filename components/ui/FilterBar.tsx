@@ -24,28 +24,51 @@ export function FilterBar() {
     o.name.toLowerCase().includes(appSearch.toLowerCase())
   ).slice(0, 10)
 
+  const btnStyle = {
+    background: 'var(--bg-secondary)',
+    border: '1px solid var(--line-primary)',
+    color: 'var(--text-secondary)',
+    fontFamily: "'Roboto Mono', monospace",
+    fontSize: '11px',
+    letterSpacing: '0.4px',
+  } as const
+
+  const dropdownStyle = {
+    background: 'var(--bg-secondary)',
+    border: '1px solid var(--line-primary)',
+  } as const
+
+  const inputStyle = {
+    background: 'var(--bg-primary)',
+    border: '1px solid var(--line-primary)',
+    color: 'var(--text-primary)',
+    fontFamily: "'Roboto Mono', monospace",
+    fontSize: '12px',
+  } as const
+
   return (
-    <div className="flex items-center gap-2 px-4 py-2 border-b border-[#1a1a1a] bg-black/50 backdrop-blur-sm">
-      <Filter size={14} className="text-[#666]" />
+    <div className="flex items-center gap-2 px-5 py-2"
+         style={{ borderBottom: '1px solid var(--line-primary)', background: 'rgba(10,10,10,0.6)', backdropFilter: 'blur(8px)' }}>
+      <Filter size={13} style={{ color: 'var(--text-tertiary)' }} />
 
       <div className="relative">
         <button
           onClick={() => setOpenDropdown(openDropdown === 'token' ? null : 'token')}
-          className="px-3 py-1 rounded-full text-xs bg-[#111] border border-[#2a2a2a]
-                     text-[#A0A0A0] hover:border-[#444] transition-colors"
+          className="px-3 py-1 rounded transition-colors"
+          style={btnStyle}
         >
-          Filter by Token
+          / Token
         </button>
         {openDropdown === 'token' && (
-          <div className="absolute top-full mt-1 left-0 w-64 rounded-lg bg-[#111]/95
-                         border border-[#2a2a2a] backdrop-blur-lg shadow-xl z-50 overflow-hidden">
-            <div className="p-2 border-b border-[#1a1a1a]">
+          <div className="absolute top-full mt-1 left-0 w-64 rounded shadow-xl z-50 overflow-hidden"
+               style={dropdownStyle}>
+            <div className="p-2" style={{ borderBottom: '1px solid var(--line-primary)' }}>
               <input
                 value={tokenSearch}
                 onChange={e => setTokenSearch(e.target.value)}
                 placeholder="Search tokens..."
-                className="w-full px-2 py-1 text-xs bg-[#0a0a0a] border border-[#2a2a2a]
-                           rounded text-white placeholder-[#666] outline-none"
+                className="w-full px-2 py-1 rounded outline-none placeholder-[#525252]"
+                style={inputStyle}
                 autoFocus
               />
             </div>
@@ -57,11 +80,13 @@ export function FilterBar() {
                     setTokenFilter(t.id, t.symbol || t.name, t.deployedChains)
                     setOpenDropdown(null)
                   }}
-                  className="w-full flex items-center gap-2 px-3 py-2 text-xs text-left
-                             hover:bg-[#1a1a1a] transition-colors"
+                  className="w-full flex items-center gap-2 px-3 py-2 text-left transition-colors"
+                  style={{ fontSize: '12px', fontFamily: "'Roboto Mono', monospace" }}
+                  onMouseEnter={e => (e.currentTarget.style.background = 'var(--line-primary)')}
+                  onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                 >
-                  <span className="text-white">{t.symbol || t.name}</span>
-                  <span className="text-[#666] ml-auto">{t.deployedChains.length} chains</span>
+                  <span style={{ color: 'var(--text-primary)' }}>{t.symbol || t.name}</span>
+                  <span className="ml-auto" style={{ color: 'var(--text-tertiary)' }}>{t.deployedChains.length} chains</span>
                 </button>
               ))}
             </div>
@@ -72,21 +97,21 @@ export function FilterBar() {
       <div className="relative">
         <button
           onClick={() => setOpenDropdown(openDropdown === 'app' ? null : 'app')}
-          className="px-3 py-1 rounded-full text-xs bg-[#111] border border-[#2a2a2a]
-                     text-[#A0A0A0] hover:border-[#444] transition-colors"
+          className="px-3 py-1 rounded transition-colors"
+          style={btnStyle}
         >
-          Filter by App
+          / App
         </button>
         {openDropdown === 'app' && (
-          <div className="absolute top-full mt-1 left-0 w-64 rounded-lg bg-[#111]/95
-                         border border-[#2a2a2a] backdrop-blur-lg shadow-xl z-50 overflow-hidden">
-            <div className="p-2 border-b border-[#1a1a1a]">
+          <div className="absolute top-full mt-1 left-0 w-64 rounded shadow-xl z-50 overflow-hidden"
+               style={dropdownStyle}>
+            <div className="p-2" style={{ borderBottom: '1px solid var(--line-primary)' }}>
               <input
                 value={appSearch}
                 onChange={e => setAppSearch(e.target.value)}
                 placeholder="Search apps..."
-                className="w-full px-2 py-1 text-xs bg-[#0a0a0a] border border-[#2a2a2a]
-                           rounded text-white placeholder-[#666] outline-none"
+                className="w-full px-2 py-1 rounded outline-none placeholder-[#525252]"
+                style={inputStyle}
                 autoFocus
               />
             </div>
@@ -98,11 +123,13 @@ export function FilterBar() {
                     setAppFilter(o.id, o.name, o.connectedChainEids)
                     setOpenDropdown(null)
                   }}
-                  className="w-full flex items-center gap-2 px-3 py-2 text-xs text-left
-                             hover:bg-[#1a1a1a] transition-colors"
+                  className="w-full flex items-center gap-2 px-3 py-2 text-left transition-colors"
+                  style={{ fontSize: '12px', fontFamily: "'Roboto Mono', monospace" }}
+                  onMouseEnter={e => (e.currentTarget.style.background = 'var(--line-primary)')}
+                  onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                 >
-                  <span className="text-white">{o.name}</span>
-                  <span className="text-[#666] ml-auto">{o.connectedChainEids.length} chains</span>
+                  <span style={{ color: 'var(--text-primary)' }}>{o.name}</span>
+                  <span className="ml-auto" style={{ color: 'var(--text-tertiary)' }}>{o.connectedChainEids.length} chains</span>
                 </button>
               ))}
             </div>
@@ -117,8 +144,8 @@ export function FilterBar() {
           </Badge>
           <button
             onClick={clearFilter}
-            className="flex items-center gap-1 px-2 py-0.5 rounded text-[10px]
-                       text-[#EF4444] hover:text-[#FF6666] transition-colors"
+            className="flex items-center gap-1 px-2 py-0.5 rounded text-[10px] transition-colors"
+            style={{ color: 'var(--accent-red)', fontFamily: "'Roboto Mono', monospace" }}
           >
             <X size={10} /> Clear
           </button>

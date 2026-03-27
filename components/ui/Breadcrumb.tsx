@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { ChevronRight } from 'lucide-react'
 
 export interface BreadcrumbItem {
   label: string
@@ -14,19 +13,21 @@ interface BreadcrumbProps {
 
 export function Breadcrumb({ items }: BreadcrumbProps) {
   return (
-    <nav className="flex items-center gap-1.5 text-sm" aria-label="Breadcrumb">
+    <nav className="flex items-center gap-1.5" aria-label="Breadcrumb"
+         style={{ fontFamily: "'Roboto Mono', monospace", fontSize: '12px', fontWeight: 500, letterSpacing: '0.05em', textTransform: 'uppercase' as const }}>
       {items.map((item, i) => (
         <span key={item.label} className="flex items-center gap-1.5">
-          {i > 0 && <ChevronRight size={12} className="text-[#444]" />}
+          {i > 0 && <span style={{ color: 'var(--text-tertiary)' }}>/</span>}
           {item.href && i < items.length - 1 ? (
             <Link
               href={item.href}
-              className="text-[#A0A0A0] hover:text-white transition-colors"
+              className="transition-colors hover:underline"
+              style={{ color: 'var(--text-secondary)', textDecorationColor: 'var(--text-tertiary)' }}
             >
               {item.label}
             </Link>
           ) : (
-            <span className={i === items.length - 1 ? 'text-white font-medium' : 'text-[#A0A0A0]'}>
+            <span style={{ color: i === items.length - 1 ? 'var(--text-primary)' : 'var(--text-secondary)' }}>
               {item.label}
             </span>
           )}

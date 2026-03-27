@@ -306,18 +306,21 @@ export function HomeBubbleMap({ chains }: HomeBubbleMapProps) {
 
       {/* Tier filter controls */}
       <div className="absolute top-3 left-3 z-20 flex flex-col gap-2">
-        <div className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-black/80 backdrop-blur-sm border border-[#1a1a1a]">
-          <Filter size={12} className="text-[#666]" />
-          <span className="text-[10px] uppercase tracking-wider text-[#555]">Tier</span>
+        <div className="flex items-center gap-1.5 px-2 py-1.5 rounded"
+             style={{ background: 'rgba(10,10,10,0.85)', backdropFilter: 'blur(8px)', border: '1px solid var(--line-primary)' }}>
+          <Filter size={12} style={{ color: 'var(--text-tertiary)' }} />
+          <span style={{ fontFamily: "'Roboto Mono', monospace", fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: 'var(--text-tertiary)' }}>Tier</span>
         </div>
         <div className="flex flex-col gap-1">
           <button
             onClick={() => setTierFilter('all')}
-            className={`px-2.5 py-1 rounded text-[10px] font-medium transition-all border ${
-              tierFilter === 'all'
-                ? 'bg-white/10 text-white border-white/20'
-                : 'bg-black/60 text-[#666] border-[#1a1a1a] hover:text-white'
-            }`}
+            className="px-2.5 py-1 rounded transition-all"
+            style={{
+              fontFamily: "'Roboto Mono', monospace", fontSize: '10px', fontWeight: 500, letterSpacing: '0.05em',
+              background: tierFilter === 'all' ? 'rgba(242,242,242,0.1)' : 'rgba(10,10,10,0.7)',
+              border: `1px solid ${tierFilter === 'all' ? 'rgba(242,242,242,0.2)' : 'var(--line-primary)'}`,
+              color: tierFilter === 'all' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+            }}
           >
             ALL
           </button>
@@ -325,12 +328,13 @@ export function HomeBubbleMap({ chains }: HomeBubbleMapProps) {
             <button
               key={tier}
               onClick={() => setTierFilter(tier === tierFilter ? 'all' : tier)}
-              className={`px-2.5 py-1 rounded text-[10px] font-medium transition-all border ${
-                tierFilter === tier
-                  ? 'text-white border-current'
-                  : 'bg-black/60 text-[#666] border-[#1a1a1a] hover:text-white'
-              }`}
-              style={tierFilter === tier ? { backgroundColor: TIER_CONFIG[tier].color + '20', borderColor: TIER_CONFIG[tier].color + '60', color: TIER_CONFIG[tier].color } : {}}
+              className="px-2.5 py-1 rounded transition-all"
+              style={{
+                fontFamily: "'Roboto Mono', monospace", fontSize: '10px', fontWeight: 500,
+                background: tierFilter === tier ? TIER_CONFIG[tier].color + '15' : 'rgba(10,10,10,0.7)',
+                border: `1px solid ${tierFilter === tier ? TIER_CONFIG[tier].color + '50' : 'var(--line-primary)'}`,
+                color: tierFilter === tier ? TIER_CONFIG[tier].color : 'var(--text-tertiary)',
+              }}
             >
               {tier}
             </button>
@@ -338,11 +342,13 @@ export function HomeBubbleMap({ chains }: HomeBubbleMapProps) {
         </div>
         <button
           onClick={() => setShowCompetitors(!showCompetitors)}
-          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded text-[10px] font-medium transition-all border ${
-            showCompetitors
-              ? 'bg-red-500/10 text-red-400 border-red-500/30'
-              : 'bg-black/60 text-[#666] border-[#1a1a1a]'
-          }`}
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded transition-all"
+          style={{
+            fontFamily: "'Roboto Mono', monospace", fontSize: '10px', fontWeight: 500,
+            background: showCompetitors ? 'rgba(245,104,104,0.08)' : 'rgba(10,10,10,0.7)',
+            border: `1px solid ${showCompetitors ? 'rgba(245,104,104,0.25)' : 'var(--line-primary)'}`,
+            color: showCompetitors ? 'var(--accent-red)' : 'var(--text-tertiary)',
+          }}
         >
           {showCompetitors ? <Eye size={10} /> : <EyeOff size={10} />}
           Competitors
@@ -353,28 +359,35 @@ export function HomeBubbleMap({ chains }: HomeBubbleMapProps) {
       <div className="absolute top-3 right-3 z-20">
         <button
           onClick={() => setShowAddModal(true)}
-          className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-black/80 backdrop-blur-sm
-                     border border-[#1a1a1a] text-[#888] hover:text-white hover:border-[#333]
-                     transition-colors text-[11px] font-medium"
+          className="flex items-center gap-1.5 px-3 py-2 rounded transition-colors"
+          style={{
+            background: 'rgba(10,10,10,0.85)', backdropFilter: 'blur(8px)',
+            border: '1px solid var(--line-primary)',
+            color: 'var(--text-secondary)',
+            fontFamily: "'Roboto Mono', monospace", fontSize: '11px', fontWeight: 500, letterSpacing: '0.05em', textTransform: 'uppercase' as const,
+          }}
         >
           <Plus size={12} />
-          Add Bubble
+          / Add
         </button>
       </div>
 
       {/* Legend */}
-      <div className="absolute bottom-3 left-3 z-20 flex flex-col gap-1 px-3 py-2 rounded-lg bg-black/80 backdrop-blur-sm border border-[#1a1a1a]">
-        <span className="text-[9px] uppercase tracking-wider text-[#555] mb-0.5">Legend</span>
+      <div className="absolute bottom-3 left-3 z-20 flex flex-col gap-1 px-3 py-2 rounded"
+           style={{ background: 'rgba(10,10,10,0.85)', backdropFilter: 'blur(8px)', border: '1px solid var(--line-primary)' }}>
+        <span style={{ fontFamily: "'Roboto Mono', monospace", fontSize: '9px', letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: 'var(--text-tertiary)', marginBottom: '2px' }}>Legend</span>
         {TIER_ORDER.map(tier => (
           <div key={tier} className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: TIER_CONFIG[tier].color }} />
-            <span className="text-[10px] text-[#888]">{tier} — {TIER_CONFIG[tier].description.split(' ').slice(0, 4).join(' ')}</span>
+            <span style={{ fontFamily: "'Roboto Mono', monospace", fontSize: '10px', color: 'var(--text-secondary)' }}>
+              {tier} — {TIER_CONFIG[tier].description.split(' ').slice(0, 4).join(' ')}
+            </span>
           </div>
         ))}
         {showCompetitors && (
-          <div className="flex items-center gap-2 mt-1 pt-1 border-t border-[#1a1a1a]">
-            <div className="w-2 h-2 rounded-full bg-red-500" />
-            <span className="text-[10px] text-[#888]">Competitors</span>
+          <div className="flex items-center gap-2 mt-1 pt-1" style={{ borderTop: '1px solid var(--line-primary)' }}>
+            <div className="w-2 h-2 rounded-full" style={{ background: 'var(--accent-red)' }} />
+            <span style={{ fontFamily: "'Roboto Mono', monospace", fontSize: '10px', color: 'var(--text-secondary)' }}>Competitors</span>
           </div>
         )}
       </div>
@@ -388,27 +401,30 @@ export function HomeBubbleMap({ chains }: HomeBubbleMapProps) {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
-            className="absolute top-4 right-4 w-80 max-h-[calc(100%-2rem)] bg-[#0A0A0A] border border-[#1a1a1a]
-                       rounded-xl shadow-2xl overflow-hidden z-30 flex flex-col"
+            className="absolute top-4 right-4 w-80 max-h-[calc(100%-2rem)] rounded shadow-2xl overflow-hidden z-30 flex flex-col"
+            style={{ background: 'var(--bg-secondary)', border: '1px solid var(--line-primary)' }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-[#1a1a1a] shrink-0"
-              style={{ borderBottomColor: selectedNode.color + '30' }}
+            <div className="flex items-center justify-between p-4 shrink-0"
+              style={{ borderBottom: `1px solid ${selectedNode.color}25` }}
             >
               <div className="flex items-center gap-3">
                 <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm"
-                  style={{ backgroundColor: selectedNode.color + '20', border: `1px solid ${selectedNode.color}40` }}
+                  className="w-10 h-10 rounded flex items-center justify-center text-sm"
+                  style={{ backgroundColor: selectedNode.color + '15', border: `1px solid ${selectedNode.color}30`, color: selectedNode.color, fontFamily: "'Roboto Mono', monospace", fontWeight: 500 }}
                 >
                   {selectedNode.label.slice(0, 2)}
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white">{selectedNode.label}</h3>
-                  <p className="text-xs text-[#666]">{selectedNode.metricLabel}</p>
+                  <h3 style={{ fontFamily: "'Roboto', sans-serif", fontWeight: 400, letterSpacing: '-0.03em', color: 'var(--text-primary)', fontSize: '15px' }}>{selectedNode.label}</h3>
+                  <p style={{ fontFamily: "'Roboto Mono', monospace", fontSize: '11px', color: 'var(--text-tertiary)', letterSpacing: '0.4px' }}>{selectedNode.metricLabel}</p>
                 </div>
               </div>
-              <button onClick={dismissPanel} className="p-1 hover:bg-[#1a1a1a] rounded transition-colors">
-                <X size={16} className="text-[#666]" />
+              <button onClick={dismissPanel} className="p-1 rounded transition-colors"
+                      style={{ color: 'var(--text-tertiary)' }}
+                      onMouseEnter={e => (e.currentTarget.style.background = 'var(--line-primary)')}
+                      onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+                <X size={16} />
               </button>
             </div>
 
@@ -615,11 +631,12 @@ function StatItem({ icon, label, value, color }: {
   icon: React.ReactNode; label: string; value: string; color: string
 }) {
   return (
-    <div className="flex items-center gap-2 p-2 rounded-lg bg-[#111] border border-[#1a1a1a]">
+    <div className="flex items-center gap-2 p-2 rounded"
+         style={{ background: 'var(--bg-primary)', border: '1px solid var(--line-primary)' }}>
       <div className="shrink-0" style={{ color }}>{icon}</div>
       <div>
-        <p className="text-[10px] text-[#555] uppercase tracking-wider">{label}</p>
-        <p className="text-sm font-mono font-semibold text-white">{value}</p>
+        <p style={{ fontFamily: "'Roboto Mono', monospace", fontSize: '9px', letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: 'var(--text-tertiary)' }}>{label}</p>
+        <p style={{ fontFamily: "'Roboto Mono', monospace", fontSize: '13px', fontWeight: 500, color: 'var(--text-primary)' }}>{value}</p>
       </div>
     </div>
   )
