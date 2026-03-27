@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useTokens } from '@/hooks/useTokens'
 import { useChains } from '@/hooks/useChains'
 import { useNotes } from '@/hooks/useNotes'
@@ -13,8 +13,8 @@ import { formatCurrency, formatPercent } from '@/lib/utils/format'
 import { getChainColor } from '@/lib/utils/chain-colors'
 import { StickyNote } from 'lucide-react'
 
-export default function TokenDetailPage({ params }: { params: Promise<{ tokenId: string }> }) {
-  const { tokenId } = use(params)
+export default function TokenDetailPage({ params }: { params: { tokenId: string } }) {
+  const { tokenId } = params
   const { tokens, isLoading } = useTokens()
   const { chains } = useChains()
   const { openPanel } = useNotes()

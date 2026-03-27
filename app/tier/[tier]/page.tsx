@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useChains } from '@/hooks/useChains'
 import { TIER_CONFIG, type Tier, TIER_ORDER } from '@/lib/utils/tier'
 import { TierBubbleMap } from '@/components/visualization/TierBubbleMap'
@@ -10,8 +10,8 @@ import { FilterBar } from '@/components/ui/FilterBar'
 import { formatNumber, formatCurrency } from '@/lib/utils/format'
 import { SkeletonCard } from '@/components/ui/LoadingSpinner'
 
-export default function TierPage({ params }: { params: Promise<{ tier: string }> }) {
-  const { tier: tierParam } = use(params)
+export default function TierPage({ params }: { params: { tier: string } }) {
+  const { tier: tierParam } = params
   const tier = tierParam.toUpperCase() as Tier
   const { chains, isLoading } = useChains()
 
