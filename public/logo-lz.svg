@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" fill="none">
+  <g>
+    <!-- LZ Mark: two interlocking chevrons forming the LayerZero icon -->
+    <path d="M10 20L20 8L30 20L20 32Z" fill="white"/>
+    <path d="M18 20L28 8L38 20L28 32Z" fill="white" fill-opacity="0.5"/>
+    <!-- Wordmark -->
+    <text x="48" y="28" fill="white" font-family="Inter, -apple-system, sans-serif" font-size="20" font-weight="800" letter-spacing="-0.02em">LayerZero</text>
+  </g>
+</svg>

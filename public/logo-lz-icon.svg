@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
+  <!-- LZ Mark: two interlocking chevrons -->
+  <path d="M10 20L20 6L30 20L20 34Z" fill="white"/>
+  <path d="M18 20L28 6L38 20L28 34Z" fill="white" fill-opacity="0.45"/>
+</svg>
